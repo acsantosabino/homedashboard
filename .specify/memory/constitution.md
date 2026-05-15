@@ -1,50 +1,51 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Constituição do MyHomeDash
 
-## Core Principles
+## Princípios Centrais
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Português como Idioma Oficial
+Todo código, documentação, comentários, commit messages, issues e pull requests DEVEM ser escritos integralmente em português (brasileiro ou europeu). Isso inclui:
+- Nomes de variáveis, funções e classes
+- Comentários de código
+- Docstrings e comentários de bloco
+- Documentação do projeto
+- Mensagens de commit e PRs
+- Issues, discussões e comentários em reviews
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+RATIONALE: O projeto é desenvolvido por e para usuários brasileiros/portugueses. Manter consistência linguística facilita colaboração, documentação e compreensão do código.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Clareza e Legibilidade
+Todo código e documentação deve priorizar clareza e legibilidade acima de concisão. Nomes em português descritivo são preferidos a abreviações crípticas em inglês.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+RATIONALE: Português claro torna o código mais acessível e reduz barreiras cognitivas para desenvolvedores da comunidade.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Documentação Estruturada
+Cada feature, módulo e componente DEVE incluir documentação em português explicando:
+- Propósito e responsabilidade
+- Como usar/integrar
+- Exemplos práticos
+- Dependências e efeitos colaterais
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+RATIONALE: Documentação de qualidade reduz curva de aprendizado e facilita manutenção futura.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+## Padrões de Projeto
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Estrutura de Código
+- Organizar código em módulos bem-definidos
+- Usar princípios SOLID e padrões de design reconhecidos
+- Manter consistência de estilo em todo o projeto
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Qualidade de Código
+- Testes unitários DEVEM acompanhar novas funcionalidades
+- Code reviews obrigatórios antes de merge
+- Verificação de linting e formatação
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+## Governança
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+A Constituição do MyHomeDash é o documento soberano que define os valores e práticas do projeto. Todas as decisões técnicas, de processos e de linguagem devem estar em conformidade com estes princípios.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Alterações à Constituição:**
+- Propostas de emenda devem ser documentadas em issues com rótulo `constituição`
+- Comunidade pode comentar e votar em propostas
+- Aprovação requer consenso dos mantenedores principais
+
+**Versão**: 1.0.0 | **Ratificação**: 2026-05-14 | **Última Emenda**: 2026-05-14
