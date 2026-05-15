@@ -32,6 +32,16 @@ A cobertura de código dos testes unitários DEVE estar no mínimo em 90%. Esta 
 
 RATIONALE: Alta cobertura de testes garante qualidade do código, reduz bugs em produção e facilita refatorações com confiança.
 
+### V. Arquitetura Cloud Native e Microserviços
+A arquitetura do MyHomeDash DEVE ser fundamentada em princípios Cloud Native e estruturada em microserviços. Cada serviço deve:
+- Ser independente, escalável e descentralizado
+- Ter uma responsabilidade bem definida e específica
+- Ser containerizado (Docker/OCI) e orquestrável
+- Comunicar-se via APIs RESTful ou event-driven
+- Ser facilmente deployável em ambientes cloud (Kubernetes, Docker Swarm, etc.)
+
+RATIONALE: Arquitetura cloud native e microserviços permite escalabilidade, resiliência, manutenção independente de componentes e flexibilidade para evoluir o projeto.
+
 ## Padrões de Projeto
 
 ### Estrutura de Código
@@ -54,4 +64,4 @@ A Constituição do MyHomeDash é o documento soberano que define os valores e p
 - Comunidade pode comentar e votar em propostas
 - Aprovação requer consenso dos mantenedores principais
 
-**Versão**: 1.1.0 | **Ratificação**: 2026-05-14 | **Última Emenda**: 2026-05-14
+**Versão**: 1.2.0 | **Ratificação**: 2026-05-14 | **Última Emenda**: 2026-05-14
