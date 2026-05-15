@@ -27,6 +27,11 @@ Cada feature, módulo e componente DEVE incluir documentação em português exp
 
 RATIONALE: Documentação de qualidade reduz curva de aprendizado e facilita manutenção futura.
 
+### IV. Cobertura de Testes Mínima de 90%
+A cobertura de código dos testes unitários DEVE estar no mínimo em 90%. Esta métrica é obrigatória e será verificada em toda pull request antes do merge.
+
+RATIONALE: Alta cobertura de testes garante qualidade do código, reduz bugs em produção e facilita refatorações com confiança.
+
 ## Padrões de Projeto
 
 ### Estrutura de Código
@@ -36,6 +41,7 @@ RATIONALE: Documentação de qualidade reduz curva de aprendizado e facilita man
 
 ### Qualidade de Código
 - Testes unitários DEVEM acompanhar novas funcionalidades
+- **Cobertura de código OBRIGATÓRIA: mínimo 90%** — verificada em cada pull request
 - Code reviews obrigatórios antes de merge
 - Verificação de linting e formatação
 
@@ -48,4 +54,4 @@ A Constituição do MyHomeDash é o documento soberano que define os valores e p
 - Comunidade pode comentar e votar em propostas
 - Aprovação requer consenso dos mantenedores principais
 
-**Versão**: 1.0.0 | **Ratificação**: 2026-05-14 | **Última Emenda**: 2026-05-14
+**Versão**: 1.1.0 | **Ratificação**: 2026-05-14 | **Última Emenda**: 2026-05-14
