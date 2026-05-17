@@ -193,7 +193,7 @@ A família usa mural compartilhado para avisos importantes (reunião de planejam
 - **RF-031**: Sistema DEVE permitir categorizar despesa (Alimentação, Transporte, Saúde, Educação, Moradia, Diversão, Outros)
 - **RF-032**: Sistema DEVE visualizar lista de despesas com filtros por data, categoria, responsável
 - **RF-033**: Sistema DEVE gerar gráficos de gastos por categoria (mês atual, últimos 3 meses, últimos 12 meses)
-- **RF-034**: Sistema DEVE permitir definir orçamento por categoria com limite mensal
+- **RF-034**: Sistema DEVE permitir definir orçamento por categoria com limite por período configurável (mensal ou anual)
 - **RF-035**: Sistema DEVE alertar visualmente quando gastos em categoria atingem 80% do orçamento
 - **RF-036**: Sistema DEVE alertar visualmente quando gastos em categoria excedem o orçamento
 - **RF-037**: Sistema DEVE mostrar resumo de gastos familiares vs orçamentos no dashboard
@@ -248,6 +248,7 @@ A família usa mural compartilhado para avisos importantes (reunião de planejam
 - **RF-071**: Sistema DEVE responsivo em mobile (web mobile e futuramente app nativo)
 - **RF-072**: Sistema DEVE ter tema claro e escuro com persistência de preferência
 - **RF-073**: Sistema DEVE exibir notificações em tempo real (push, email, in-app)
+- **RF-074**: Sistema DEVE usar email e in-app como canais principais de notificação; notificações push via navegador são opcionais para o MVP
 
 ### Entidades Chave
 
@@ -277,6 +278,21 @@ A família usa mural compartilhado para avisos importantes (reunião de planejam
 
 - **Auditoria**: Usuário, ação, tabela alterada, valores antigos, valores novos, timestamp, IP origem, user agent
 
+## Clarificações
+
+### Sessão 2026-05-17
+
+- Definir sincronização do calendário como bidirecional e eventual: o sistema aceita alterações externas e locais, mostra estado de sincronização e registra conflitos para resolução manual.
+- Para o MVP, o canal de notificações prioritário é email e in-app; notificações push via navegador são consideradas recurso secundário.
+- A autenticação de dois fatores (2FA) será obrigatória para responsáveis da família e recomendada para demais membros, suportando aplicativo autenticador e email.
+- A criptografia aplica-se a dados sensíveis em repouso e todas as comunicações usam TLS/SSL.
+- Retenção de soft delete: eventos, tarefas e listas são retidos por 30 dias para recuperação; documentos são retidos por 90 dias antes de exclusão permanente.
+- A arquitetura cloud native em microserviços pode agrupar módulos funcionais próximos no MVP (por exemplo, Listas de Compras + Avisos em um único serviço) para reduzir complexidade inicial.
+- O modelo Freemium do MVP terá plano gratuito com limite de até 5 membros e 5GB de armazenamento; planos pagos removem esses limites e adicionam recursos extras.
+- O suporte a orçamentos deve permitir períodos flexíveis, inicialmente mensal e anual, com alerta acionado em 80% e excesso do limite.
+- A detecção de fraude para o MVP será focada em anomalias de autenticação e tentativas de login suspeitas, não em análise financeira avançada.
+- Uploads de documentos de até 100MB devem validar tipo de arquivo e escanear metadados básicos para evitar arquivos maliciosos.
+
 ## Critérios de Sucesso *(obrigatório)*
 
 ### Resultados Mensuráveis
@@ -303,7 +319,7 @@ A família usa mural compartilhado para avisos importantes (reunião de planejam
 - **Escalabilidade é considerada na arquitetura**: Microserviços permitirão escalar serviços independentemente conforme crescimento
 - **Retenção de dados soft deleted por 30-90 dias**: Permite recuperação acidental de dados deletados antes de purga permanente
 - **Notificações por email como principal canal**: Aplicação envia notificações por email; push notifications via browser é secundário para MVP
-- **Orçamentos são anualizáveis**: Usuário pode ter orçamentos mensais, trimestrais ou anuais
+- **Orçamentos podem ser mensais ou anuais**: Usuário pode definir orçamento por período mensal ou anual
 - **Permissões granulares permitem gestão de crianças**: Responsáveis podem restringir acesso de crianças a módulos e operações específicas
 - **Conformidade LGPD é obrigatória desde dia 1**: Não será "adicionada depois"; todo código já respeita direitos de dados dos usuários
 - **Arquitetura cloud native com microserviços**: Cada módulo (Calendário, Tarefas, Finanças, etc.) pode ser um serviço independente
