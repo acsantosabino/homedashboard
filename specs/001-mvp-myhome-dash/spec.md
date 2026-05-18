@@ -1,6 +1,6 @@
 # Especificação de Feature: MVP MyHomeDash - Plataforma de Gestão Familiar
 
-**Ramo de Feature**: `001-mvp-myhome-dash`
+**Ramo de Feature**: `feature/mvp-myhome-dash`
 
 **Data de Criação**: 14 de maio de 2026
 
@@ -233,7 +233,10 @@ A família usa mural compartilhado para avisos importantes (reunião de planejam
 - **RF-059**: Sistema DEVE ser conforme com LGPD (Lei Geral de Proteção de Dados)
 - **RF-060**: Sistema DEVE ter política de privacidade clara e acessível
 - **RF-061**: Sistema DEVE permitir usuário solicitar cópia de seus dados (direito de portabilidade LGPD)
+- **RF-075**: Sistema DEVE hospedar todos os dados pessoais do MyHomeDash em infraestrutura localizada no Brasil para atender à LGPD.
+- **RF-076**: Sistema DEVE incluir termos de uso acessíveis que declararem explicitamente não haver compartilhamento de dados pessoais com terceiros sem consentimento expresso.
 - **RF-062**: Sistema DEVE permitir usuário solicitar exclusão de seus dados (direito ao esquecimento LGPD)
+ 
 - **RF-063**: Sistema DEVE manter logs de acesso e atividades por mínimo 1 ano para conformidade
 - **RF-064**: Sistema DEVE ter certificado SSL/TLS para todas comunicações
 - **RF-065**: Sistema DEVE proteger contra CSRF (Cross-Site Request Forgery) com tokens
@@ -249,6 +252,45 @@ A família usa mural compartilhado para avisos importantes (reunião de planejam
 - **RF-072**: Sistema DEVE ter tema claro e escuro com persistência de preferência
 - **RF-073**: Sistema DEVE exibir notificações em tempo real (push, email, in-app)
 - **RF-074**: Sistema DEVE usar email e in-app como canais principais de notificação; notificações push via navegador são opcionais para o MVP
+
+## Requisitos Não Funcionais
+
+- **RNF-001**: Infraestrutura deve ser definida e provisionada com Terraform em `/infra`, com módulos totalmente modulares e reutilizáveis.
+- **RNF-002**: A infraestrutura Terraform deve ser organizada em diretórios separados para `backend`, `frontend` e `api-gtw`, e deve incluir configurações de roles, variáveis e ambientes separados.
+- **RNF-003**: A infraestrutura deve usar módulos versionados em `/infra/modules`, incluindo roles, AWS Lambda, buckets S3, CloudFront e API Gateway.
+- **RNF-004**: Configurações de ambiente devem ser separadas em `/infra/environments/` com arquivos TFVARS por ambiente (`dev`, `prod`, etc.).
+- **RNF-005**: CI/CD deve ser implementado com GitHub Actions, incluindo lint, testes unitários, cobertura mínima de 90%, testes E2E automatizados e deploy controlado.
+- **RNF-006**: Backend deve ser construído como funções serverless AWS Lambda e exposto por AWS API Gateway, mantendo contrato claro entre frontend e backend.
+- **RNF-007**: Frontend deve ser organizado como microfrontends Angular hospedados em AWS S3 e distribuídos por CloudFront.
+- **RNF-008**: As principais jornadas de usuário devem ser cobertas por testes end-to-end automatizados com Robot Framework.
+- **RNF-009**: Toda documentação e código do projeto devem ser redigidos em português.
+- **RNF-010**: A observabilidade deve incluir logs estruturados, métricas e alertas para erros críticos.
+- **RNF-011**: O armazenamento relacional de dados transacionais deve ser implementado com AWS RDS PostgreSQL gerenciado, incluindo suporte a migrações de schema, integridade referencial e backups automáticos.
+- **RNF-012**: A infraestrutura de AWS RDS PostgreSQL deve ser declarada em Terraform no diretório `/infra`, com configurações de ambiente separadas e estado versionado.
+
+## Critérios de Sucesso *(obrigatório)*
+
+### Resultados Mensuráveis
+
+- **CS-001**: A cobertura de testes unitários deve ser de pelo menos 90% antes de qualquer merge para `develop`.
+- **CS-002**: Pelo menos 3 jornadas principais de usuário P1 devem ser cobertas por testes E2E automatizados.
+- **CS-003**: Eventos criados ou atualizados no MyHomeDash devem sincronizar com Google Calendar e Outlook em até 5 minutos.
+- **CS-004**: 95% dos responsáveis que criarem uma nova família e adicionarem membros devem concluir o fluxo sem erro na primeira tentativa.
+- **CS-005**: O dashboard inicial deve ser exibido em até 2 segundos para uma família com até 50 eventos e tarefas.
+- **CS-006**: Logs de auditoria para ações críticas devem estar disponíveis por pelo menos 12 meses.
+- **CS-007**: O banco de dados PostgreSQL gerenciado deve estar provisionado com esquema aplicado via migrações controladas e backups automáticos, garantindo failover ou recovery em menos de 30 minutos.
+- **CS-008**: Solicitações de acesso, portabilidade ou exclusão de dados relacionadas à LGPD devem ser processadas em até 7 dias úteis.
+
+## Assunções
+
+- Assume-se que o MVP será implementado com Angular e Angular Material no frontend.
+- Assume-se que o backend será implementado em Python como AWS Lambda, exposto por API Gateway.
+- Assume-se que a infraestrutura será provisionada com Terraform e que o pipeline usará GitHub Actions para build, testes e deploy.
+- Assume-se que a infraestrutura Terraform será modular, com diretórios separados em `/infra/backend`, `/infra/frontend`, `/infra/api-gtw`, e módulos reutilizáveis em `/infra/modules`.
+- Assume-se que as configurações de ambiente serão separadas em `/infra/environments/`, usando arquivos TFVARS para `dev`, `prod` e outros ambientes.
+- Assume-se que a sincronização com Google Calendar e Outlook usará OAuth2, com tokens armazenados em cofre seguro.
+- Assume-se que o primeiro lançamento será uma aplicação web responsiva e não incluirá versão nativa mobile.
+- Assume-se que dados sensíveis e credenciais serão protegidos conforme LGPD e melhores práticas de segurança.
 
 ### Entidades Chave
 
@@ -326,5 +368,4 @@ A família usa mural compartilhado para avisos importantes (reunião de planejam
 - **CI/CD pipeline com verificação de cobertura de testes**: Builds não passam se cobertura cai abaixo de 90%
 - **Documentação em português obrigatória**: Conforme Constituição do projeto
 - **Modelo Freemium/SaaS**: MVP terá plano gratuito com limitações (ex: até 5 membros, 5GB storage) e planos pagos com recursos adicionais
-- **Dados são persistidos em banco de dados centralizado**: Com replicação para alta disponibilidade (não especifica qual BD em especificação, deixa para arquitetura)
-
+- **Dados são persistidos em PostgreSQL gerenciado**: Com replicação para alta disponibilidade e integridade relacional obrigatória para dados estruturados do sistema- **Dados pessoais armazenados no Brasil**: A infraestrutura deve garantir residência de dados no Brasil e os termos de uso devem declarar não compartilhamento de dados pessoais com terceiros sem consentimento.
