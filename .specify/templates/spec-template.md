@@ -1,10 +1,17 @@
 # Feature Specification: [FEATURE NAME]
 
-**Feature Branch**: `[###-feature-name]`
+**Feature Branch**: `feature/<nome-da-feature>`
 
 **Created**: [DATE]
 
 **Status**: Draft
+
+**Governança/Padronização**:
+- Documentação e código DEVEM ser escritos em **português**.
+- Branches de feature DEVEM seguir o padrão `feature/<nome-da-feature>` (GitFlow).
+- Infraestrutura deve ser descrita em **Terraform** e armazenada em `/infra` quando aplicável.
+- CI/CD padrão: **GitHub Actions** (lint, unit tests, cobertura mínima de 90%, E2E Robot, deploy).
+- Testes E2E das principais jornadas DEVEM ser automatizados em **Robot Framework**.
 
 **Input**: User description: "$ARGUMENTS"
 
