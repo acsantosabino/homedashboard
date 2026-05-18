@@ -7,11 +7,14 @@ description: "Task list template for feature implementation"
 
 **Input**: Design documents from `/specs/[###-feature-name]/`
 
-**Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
+**Pré-requisitos**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
+- Infraestrutura: módulos Terraform iniciais disponíveis em `/infra` quando aplicável
+- CI/CD: workflows GitHub Actions básicos (lint, test, coverage, e2e) configurados no repositório
+- Governança: branch GitFlow `feature/<nome-da-feature>` e exemplos de Robot Framework para jornadas principais
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Testes**: Os exemplos abaixo incluem tarefas de teste. Testes são OBRIGATÓRIOS para jornadas centrais: incluir testes unitários, verificação de cobertura mínima de **90%**, e testes E2E via Robot Framework conforme especificado na feature.
 
-**Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
+**Organização**: As tarefas são agrupadas por história de usuário para permitir implementação e testes independentes de cada história.
 
 ## Format: `[ID] [P?] [Story] Description`
 

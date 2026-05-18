@@ -1,50 +1,38 @@
 # [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
 
-## Core Principles
+## Princípios Centrais
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Português como língua de engenharia
+Todos os artefatos técnicos DEVEM ser escritos em **português**. Essa regra vale para documentação, especificações, comentários de código e mensagens de commit quando não há exigência de idioma externo.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Infraestrutura como código
+A infraestrutura DEVEM ser provisionada via **Terraform**. Todo recurso reutilizável deve ser modelado em módulos versionados e mantido no repositório, preferencialmente em `/infra`.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. CI/CD baseado em GitHub Actions
+Os pipelines de integração e entrega contínua DEVEM ser implementados com **GitHub Actions**. Os workflows obrigatórios incluem:
+- lint
+- testes unitários
+- verificação de cobertura mínima de **90%**
+- testes E2E com **Robot Framework**
+- deploy controlado
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. GitFlow obrigatório
+A estratégia de branches deve seguir **GitFlow**. Novas features DEVEM ser desenvolvidas em branches `feature/<nome-da-feature>` e releases em `release/<versão>`.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Testes de aceitação automatizados
+Os testes de aceitação e jornadas principais DEVEM ser automatizados com **Robot Framework** e executados no CI.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Restrições adicionais
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Qualquer mudança que reduza a cobertura total abaixo de **90%** DEVEM ser recusada até que a cobertura seja restaurada.
+- Documentação técnica e entregáveis de projeto DEVEM referenciar os padrões de Terraform e GitHub Actions quando aplicáveis.
+- As decisões de arquitetura DEVEM ser registradas e justificadas por escrito.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Fluxo de trabalho e governança
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Todo PR DEVEM incluir verificação de conformidade com esta constituição.
+- O uso de branches de feature fora de `feature/<nome-da-feature>` DEVEM ser evitado.
+- Mudanças nos módulos de infraestrutura DEVEM ser revisadas com cuidado por revisão de código e testes de infraestrutura.
+- Alterações nesta constituição DEVEM ser documentadas com versão e data de ratificação.
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
-
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Versão**: [CONSTITUTION_VERSION] | **Ratificado**: [RATIFICATION_DATE] | **Última alteração**: [LAST_AMENDED_DATE]

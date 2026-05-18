@@ -38,9 +38,17 @@
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+*GATE: Deve passar antes da Fase 0 de pesquisa. Revalidar após a Fase 1 de design.*
 
-[Gates determined based on constitution file]
+Requisitos obrigatórios (GATES do projeto MyHomeDash):
+- Todo conteúdo técnico e documentação DEVEM estar em **português**.
+- Infraestrutura deve ser provisionada via **Terraform** (módulos versionados e preferencialmente em `/infra`).
+- CI/CD DEVE usar **GitHub Actions** com workflows que incluam: lint, testes unitários, verificação de cobertura (falha se <90%), testes E2E (Robot Framework) e deploy controlado.
+- A estratégia de branches segue **GitFlow**: novas features em `feature/<nome-da-feature>` e releases em `release/<versão>`.
+- Testes E2E automatizados (Robot Framework) são obrigatórios para as principais jornadas de usuário.
+- As pipelines DEVEM falhar quando a cobertura de código ficar abaixo de **90%**.
+
+Gates determined based on constitution file
 
 ## Project Structure
 
