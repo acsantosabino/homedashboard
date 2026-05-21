@@ -3,16 +3,14 @@
 <!--
 Sync Impact Report
 
-Version change: 1.2.1 -> 1.2.2
-Modified sections: V. Arquitetura Cloud Native e Microserviços (expansão com tecnologias específicas)
-Added sections: Arquitetura Técnica (especifica frontend/backend/deploy/testes)
-Templates requiring updates: .specify/templates/plan-template.md (⚠ pending), .specify/templates/spec-template.md (⚠ pending), .specify/templates/tasks-template.md (⚠ pending)
+Version change: 1.2.2 -> 1.2.3
+Modified sections: VI. Banco de dados relacional PostgreSQL
+Added sections: VI. Banco de dados relacional PostgreSQL
+Templates requiring updates: none
 Follow-up TODOs:
-- Atualizar templates que referenciam orientações arquiteturais (plan/spec/tasks)
-- Criar exemplo inicial de pipeline CI/CD que valide cobertura 90% e execute Robot Framework
-- Criar módulos Terraform iniciais para S3/CloudFront/API Gateway/Lambda e pipeline de deploy
-- Implementar workflows GitHub Actions de CI/CD de referência (build, testes, E2E Robot, deploy para staging)
-- Validar política de retenção e backups com equipe operacional
+- Validar alinhamento de arquitetura e documentação com PostgreSQL como banco relacional obrigatório
+- Verificar infra Terraform e pipeline CI/CD para suporte a RDS PostgreSQL ou equivalente gerenciado
+- Atualizar especificações de ambiente e dados quando o design do schema relacional for detalhado
 -->
 
 ## Princípios Centrais
@@ -69,6 +67,15 @@ RATIONALE: Arquitetura cloud native e microserviços permite escalabilidade, res
 - **CI/CD**: O pipeline de integração contínua e entrega contínua DEVERÁ ser implementado com **GitHub Actions**. Os workflows obrigatórios incluem: lint, testes unitários com verificação de cobertura (falha se <90%), testes E2E com Robot Framework, e deploy automatizado para staging/production conforme regras de aprovação.
 - **Segurança operacional**: Princípio de menor privilégio para IAM, uso de TLS em todas comunicações, armazenamento de segredos em cofre, e revisão de permissões periódica.
 
+### VI. Banco de dados relacional PostgreSQL
+O armazenamento de dados transacionais e de estado do MyHomeDash DEVE ser implementado com **PostgreSQL**. A solução deve:
+- garantir integridade referencial, ACID e transações consistentes
+- ser provisionada como serviço gerenciado ou equivalente que suporte backup, failover e criptografia em repouso
+- incluir esquema versionado, migrações controladas e políticas de retenção de dados compatíveis com LGPD
+- ser a única opção de armazenamento relacional para dados estruturados do sistema
+
+RATIONALE: PostgreSQL oferece robustez, consistência e suporte a consultas relacionais complexas, reduzindo custo de manutenção e evitando decisões divergentes sobre persistência de dados.
+
 ## Padrões de Projeto
 
 ### Estrutura de Código
@@ -101,4 +108,4 @@ O modelo obrigatório de branching do repositório é **GitFlow**. Convenções 
 
 PRs de funcionalidade devem ser direcionadas a `develop`; releases e hotfixes seguem o processo de merge para `main` com revisão de PR e aprovação. Mesclagens para `main` exigem pipelines de CI/CD verdes (GitHub Actions) e revisão de mantenedores.
 
-**Versão**: 1.2.2 | **Ratificação**: 2026-05-14 | **Última Emenda**: 2026-05-17
+**Versão**: 1.2.3 | **Ratificação**: 2026-05-14 | **Última Emenda**: 2026-05-17

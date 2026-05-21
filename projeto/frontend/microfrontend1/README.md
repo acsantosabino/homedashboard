@@ -1,4 +1,4 @@
-Microfrontend 1 — interface Angular para funcionalidade específica.
+Familia Dashboard — interface Angular para o dashboard familiar.
 
 Instruções:
 - Tecnologia: Angular + Angular Material

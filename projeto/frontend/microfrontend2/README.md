@@ -1,4 +1,4 @@
-Microfrontend 2 — interface Angular para outra funcionalidade.
+Agenda e Tarefas — interface Angular para agenda compartilhada e gestão de tarefas.
 
 Instruções:
 - Tecnologia: Angular + Angular Material
