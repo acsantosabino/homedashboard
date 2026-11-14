@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch: {}
+
+jobs:
+  backend-tests:
+    name: Backend lint, unit tests, and coverage
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.14]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r projeto/backend/auth-service/requirements.txt
+          pip install -r projeto/backend/app-service/requirements.txt
+      - name: Run backend unit tests
+        run: |
+          pytest --maxfail=1 --disable-warnings -q projeto/backend/auth-service/tests projeto/backend/app-service/tests
+      - name: Run backend coverage
+        run: |
+          coverage run -m pytest -q projeto/backend/auth-service/tests projeto/backend/app-service/tests
+          coverage report --fail-under=90
+
+  frontend-tests:
+    name: Frontend lint and unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+      - name: Install dependencies for Familia Dashboard
+        working-directory: projeto/frontend/familia-dashboard
+        run: npm install
+      - name: Install dependencies for Agenda Tarefas
+        working-directory: projeto/frontend/agenda-tarefas
+        run: npm install
+      - name: Run frontend lint
+        working-directory: projeto/frontend/familia-dashboard
+        run: npm run lint
+      - name: Run frontend unit tests
+        working-directory: projeto/frontend/familia-dashboard
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+  robot-e2e:
+    name: Robot Framework E2E
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.14
+      - name: Install Robot Framework dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tests/e2e/robot/requirements.txt
+      - name: Run Robot Framework base suite
+        run: |
+          mkdir -p tests/e2e/robot/reports
+          robot -d tests/e2e/robot/reports tests/e2e/robot
+
+  deploy:
+    name: Deploy placeholder
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deployment placeholder
+        run: echo "Deploy workflow triggered; add real deploy steps in a future iteration."
