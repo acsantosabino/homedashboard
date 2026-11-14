@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: MyHomeDash API Gateway
+  version: 0.1.0
+  description: API gateway contract for MyHomeDash authentication, family management and core platform routes.
+servers:
+  - url: https://api.myhomedash.example.com/v1
+    description: API Gateway público de produção
+paths:
+  /auth/register:
+    post:
+      summary: Registrar novo usuário e criar família inicial
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                senha:
+                  type: string
+                  minLength: 8
+                nome:
+                  type: string
+              required:
+                - email
+                - senha
+                - nome
+      responses:
+        '201':
+          description: Usuário registrado com família criada
+        '400':
+          description: Requisição inválida
+        '409':
+          description: Email já cadastrado
+  /auth/login:
+    post:
+      summary: Efetuar login de usuário
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                senha:
+                  type: string
+              required:
+                - email
+                - senha
+      responses:
+        '200':
+          description: Login bem-sucedido
+        '401':
+          description: Credenciais inválidas
+  /familias:
+    post:
+      summary: Criar nova família ou convidar membros
+      tags:
+        - Família
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome_familia:
+                  type: string
+              required:
+                - nome_familia
+      responses:
+        '201':
+          description: Família criada com sucesso
+        '400':
+          description: Requisição inválida
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
